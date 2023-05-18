@@ -1,7 +1,9 @@
 import struct
 import datetime
-from datetime import timedelta
+import time
 from fonction_decodage import*
+from fonction_transfert import*
+
 def decodage_udp(date2, bench_3, bench_5, framesize, trame):
 	trame_udp = struct.unpack_from('>12B5H2BH8B7H2BH2BI2H', trame)
 	macd1 = trame_udp[0]
@@ -76,23 +78,19 @@ def decodage_udp(date2, bench_3, bench_5, framesize, trame):
 	field_28 = field_27_28 & mask_field_28
 	field_29 = (field_29_30 & mask_field_29) >> 10
 	field_30 = field_29_30 & mask_field_30
-	
-	masque_MID_field_14 = 0b1000000000000000000000000000
-	masque_MID_field_18 = 0b0111110000000000000000000000
-	masque_MID_field_28 = 0b0000001111110000000000000000	
-	masque_MID_field_29 = 0b0000000000001111110000000000
-	masque_MID_field_30 = 0b0000000000000000001111111111
-
-	MID_field_14 = (field_14 & masque_MID_field_14) >> 27
-	MID_field_18 = (field_18 & masque_MID_field_18) >> 22 
-	MID_field_28 = (field_28 & masque_MID_field_28) >> 16 
-	MID_field_29 = (field_29 & masque_MID_field_29) >> 10  
-	MID_field_30 = field_30 & masque_MID_field_30 
-	MID = PMID(MID_field_14, MID_field_18, MID_field_28, MID_field_29, MID_field_30)
 
 	field_35 = field_35*(1/2**16)
 	field_33_34_35 = field_33_34 + field_35 	
 
+	date_init_framedate = datetime.datetime(1970, 1, 1, 0, 0, 0)
+	date_init_packetdate = datetime.datetime(2000, 1, 1, 12, 0, 0)
+	framedate = date_init_framedate + datetime.timedelta(0, date2)
+	framedate = framedate.strftime("%d/%m/%Y %H:%M:%S")
+	packet_date = date_init_packetdate + datetime.timedelta(0, field_33_34_35)
+	packet_date = packet_date.strftime("%d/%m/%Y %H:%M:%S") 
+	
+	MID = field_14 + field_18 + field_28 + field_29 + field_30
+ 
 	FT_bench_5 = FT_0(bench_5)
 	FT_macdest = FT_MAC(macdest)
 	FT_macsrc = FT_MAC(macsrc)
@@ -106,8 +104,6 @@ def decodage_udp(date2, bench_3, bench_5, framesize, trame):
 	FT_field_32 = FT_1(field_32)
 	FT_MID = FT_6(MID)
 
-	trame_udp = date2, MID, bench_3, FT_bench_5, framesize, FT_macdest, FT_macsrc, hex(field_1), field_2, field_3, field_4, field_5, field_6, field_7, FT_src_ip, FT_dest_ip, field_8, field_9, field_10, field_11, FT_field_14, field_16, FT_field_17, FT_field_18, field_20, field_21, hex(field_23), hex(field_25), field_26, FT_field_28, FT_field_29, field_30, FT_field_32, field_33_34_35
+	trame_udp = framedate, MID, bench_3, FT_bench_5, framesize, FT_macdest, FT_macsrc, hex(field_1), field_2, field_3, field_4, field_5, field_6, field_7, FT_src_ip, FT_dest_ip, field_8, field_9, field_10, field_11, FT_field_14, field_16, FT_field_17, FT_field_18, field_20, field_21, hex(field_23), hex(field_25), field_26, FT_field_28, FT_field_29, field_30, FT_field_32, packet_date
 	return trame_udp
-
-
 

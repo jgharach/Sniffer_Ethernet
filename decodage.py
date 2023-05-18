@@ -1,7 +1,6 @@
 import struct
 from decodage_udp import*
 from decodage_arp import*
-from fonction_decodage import*
 f = open("Vt-DEMO_mem_observability/ethernet.result_data", "rb")
 while True:
 	data = f.read(28)

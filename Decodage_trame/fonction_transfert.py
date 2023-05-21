@@ -169,7 +169,7 @@ def FT_6(MID):
                 return 'FT_6_MID_13'
 	elif MID == '0x33c0e':
                 return 'FT_6_MID_14'
-	elif MID == '0x33cf':
+	elif MID == '0x33c0f':
                 return 'FT_6_MID_15'
 	elif MID == '0x33c10':
                 return 'FT_6_MID_16'
@@ -256,7 +256,7 @@ def FT_6(MID):
 	elif MID == '0x33c67':
                 return 'FT_6_MID_57'
 	elif MID == '0x33c68':
-                return 'FT_6_MID_58'
+            return 'FT_6_MID_58'
 	elif MID == '0x33c69':
                 return 'FT_6_MID_59'
 	elif MID == '0x33d08':

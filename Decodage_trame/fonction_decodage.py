@@ -14,10 +14,6 @@ def adr_ip(ip1, ip2, ip3, ip4):
         ip = '.'.join(ip)
         return ip	
 
-def MID(MID_14, MID_18, MID_28, MID_29, MID_30):
-        MID = [hex(MID_14), hex(MID_18)[2:], hex(MID_28)[2:], hex(MID_29)[2:], hex(MID_30)[2:]]
-        MID = ''.join(MID)
-        return MID
 
 
 

@@ -1,10 +1,9 @@
 import struct
 import datetime
-import time
 from fonction_decodage import*
 from fonction_transfert import*
 
-def decodage_udp(date2, bench_3, bench_5, framesize, trame):
+def decodage_udp(date2, bench_3, bench_5, framesize, trame,):
 	trame_udp = struct.unpack_from('>12B5H2BH8B7H2BH2BI2H', trame)
 	macd1 = trame_udp[0]
 	macd2 = trame_udp[1]
@@ -18,7 +17,7 @@ def decodage_udp(date2, bench_3, bench_5, framesize, trame):
 	macs4 = trame_udp[9] 
 	macs5 = trame_udp[10]
 	macs6 = trame_udp[11]
-	field_1 = trame_udp[12]	
+	field_1 = hex(trame_udp[12])	
 	field_2 = trame_udp[13]	
 	field_3 = trame_udp[14]
 	field_4 = trame_udp[15]
@@ -72,8 +71,8 @@ def decodage_udp(date2, bench_3, bench_5, framesize, trame):
 	field_17 = (field_13_14_15_16_17_18 & mask_field_17) >> 5
 	field_18 = field_13_14_15_16_17_18 & mask_field_18
 	field_20 = field_19_20 & mask_field_20
-	field_23 = (field_22_23_24_25_26 & mask_field_23) >> 3
-	field_25 = (field_22_23_24_25_26 & mask_field_25) >> 1
+	field_23 = hex((field_22_23_24_25_26 & mask_field_23) >> 3)
+	field_25 = hex((field_22_23_24_25_26 & mask_field_25) >> 1)
 	field_26 = field_22_23_24_25_26 & mask_field_26
 	field_28 = field_27_28 & mask_field_28
 	field_29 = (field_29_30 & mask_field_29) >> 10
@@ -85,12 +84,20 @@ def decodage_udp(date2, bench_3, bench_5, framesize, trame):
 	date_init_framedate = datetime.datetime(1970, 1, 1, 0, 0, 0)
 	date_init_packetdate = datetime.datetime(2000, 1, 1, 12, 0, 0)
 	framedate = date_init_framedate + datetime.timedelta(0, date2)
-	framedate = framedate.strftime("%d/%m/%Y %H:%M:%S")
+	framedate = framedate.strftime("%Y-%m-%d %H:%M:%S")
 	packet_date = date_init_packetdate + datetime.timedelta(0, field_33_34_35)
-	packet_date = packet_date.strftime("%d/%m/%Y %H:%M:%S") 
+	packet_date = packet_date.strftime("%Y-%m-%d %H:%M:%S") 
 	
-	MID = field_14 + field_18 + field_28 + field_29 + field_30
- 
+	MID_field_14 = format(field_14, '01b')   
+	MID_field_18 = format(field_18, '05b')  
+	MID_field_28 = format(field_28, '06b')
+	MID_field_29 = format(field_29, '06b')
+	MID_field_30 = format(field_30, '010b')
+
+	MID = MID_field_14 + MID_field_18 + MID_field_28 + MID_field_29 + MID_field_30    
+	PMID = hex(int(MID, 2))    
+
+    
 	FT_bench_5 = FT_0(bench_5)
 	FT_macdest = FT_MAC(macdest)
 	FT_macsrc = FT_MAC(macsrc)
@@ -102,8 +109,6 @@ def decodage_udp(date2, bench_3, bench_5, framesize, trame):
 	FT_field_28 = FT_3(field_28)
 	FT_field_29 = FT_4(field_29)
 	FT_field_32 = FT_1(field_32)
-	FT_MID = FT_6(MID)
-
-	trame_udp = framedate, MID, bench_3, FT_bench_5, framesize, FT_macdest, FT_macsrc, hex(field_1), field_2, field_3, field_4, field_5, field_6, field_7, FT_src_ip, FT_dest_ip, field_8, field_9, field_10, field_11, FT_field_14, field_16, FT_field_17, FT_field_18, field_20, field_21, hex(field_23), hex(field_25), field_26, FT_field_28, FT_field_29, field_30, FT_field_32, packet_date
-	return trame_udp
-
+	FT_MID = FT_6(PMID)
+ 
+	return framedate, FT_MID, bench_3, FT_bench_5, framesize, FT_macdest, FT_macsrc, field_1, field_2, field_3, field_4, field_5, field_6, field_7, FT_src_ip, FT_dest_ip, field_9, field_10, field_11, FT_field_14, field_16, FT_field_17, FT_field_18, field_20, field_21, field_23, field_25, field_26, FT_field_28, FT_field_29, field_30, FT_field_32, packet_date 

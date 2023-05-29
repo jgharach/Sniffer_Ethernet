@@ -13,7 +13,3 @@ def adr_ip(ip1, ip2, ip3, ip4):
         ip = [str(ip1), str(ip2), str(ip3), str(ip4)]
         ip = '.'.join(ip)
         return ip	
-
-
-
-

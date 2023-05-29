@@ -1,53 +1,20 @@
 import struct
 import datetime
+import json
 from fonction_decodage import*
-from fonction_transfert import*
 
-def decodage_udp(date2, bench_3, bench_5, framesize, trame,):
-	trame_udp = struct.unpack_from('>12B5H2BH8B7H2BH2BI2H', trame)
-	macd1 = trame_udp[0]
-	macd2 = trame_udp[1]
-	macd3 = trame_udp[2]
-	macd4 = trame_udp[3]
-	macd5 = trame_udp[4]
-	macd6 = trame_udp[5]	
-	macs1 = trame_udp[6]
-	macs2 = trame_udp[7]	
-	macs3 = trame_udp[8]
-	macs4 = trame_udp[9] 
-	macs5 = trame_udp[10]
-	macs6 = trame_udp[11]
-	field_1 = hex(trame_udp[12])	
-	field_2 = trame_udp[13]	
-	field_3 = trame_udp[14]
-	field_4 = trame_udp[15]
-	field_5 = trame_udp[16] 
-	field_6 = trame_udp[17]
-	field_7 = trame_udp[18]
-	field_8 = trame_udp[19]
-	src_ip1 = trame_udp[20]
-	src_ip2 = trame_udp[21]
-	src_ip3 = trame_udp[22]
-	src_ip4 = trame_udp[23] 
-	dest_ip1 = trame_udp[24]
-	dest_ip2 = trame_udp[25]
-	dest_ip3 = trame_udp[26] 
-	dest_ip4 = trame_udp[27]
-	field_9 = trame_udp[28] 
-	field_10 = trame_udp[29]
-	field_11 = trame_udp[30]
-	field_12 = trame_udp[31]
-	field_13_14_15_16_17_18 = trame_udp[32]
-	field_19_20 = trame_udp[33]
-	field_21 = trame_udp[34] 
-	field_22_23_24_25_26 = trame_udp[35] 
-	field_27_28 = trame_udp[36]
-	field_29_30 = trame_udp[37]
-	field_31 = trame_udp[38]
-	field_32 = trame_udp[39]
-	field_33_34 = trame_udp[40]
-	field_35 = trame_udp[41]
-	field_36 = trame_udp[42]
+def decodage_udp(date2, bench_3, bench_5, framesize, trame, FT):
+    
+	(macd1, macd2, macd3, macd4, macd5, macd6,
+    macs1, macs2, macs3, macs4, macs5, macs6,
+    field_1, field_2, field_3, field_4, field_5, field_6, field_7, field_8,
+    src_ip1, src_ip2, src_ip3, src_ip4,
+    dest_ip1, dest_ip2, dest_ip3, dest_ip4,
+    field_9, field_10, field_11, field_12,
+    field_13_14_15_16_17_18, field_19_20,
+    field_21, field_22_23_24_25_26,
+    field_27_28, field_29_30, field_31, field_32,
+    field_33_34, field_35, field_36) = struct.unpack_from('>12B5H2BH8B7H2BH2BI2H', trame)
 
 	macdest = adr_mac(macd1, macd2, macd3, macd4, macd5, macd6)
 	macsrc = adr_mac(macs1, macs2, macs3, macs4, macs5, macs6)
@@ -82,9 +49,9 @@ def decodage_udp(date2, bench_3, bench_5, framesize, trame,):
 	field_33_34_35 = field_33_34 + field_35 	
 
 	date_init_framedate = datetime.datetime(1970, 1, 1, 0, 0, 0)
-	date_init_packetdate = datetime.datetime(2000, 1, 1, 12, 0, 0)
 	framedate = date_init_framedate + datetime.timedelta(0, date2)
 	framedate = framedate.strftime("%Y-%m-%d %H:%M:%S")
+	date_init_packetdate = datetime.datetime(2000, 1, 1, 12, 0, 0)
 	packet_date = date_init_packetdate + datetime.timedelta(0, field_33_34_35)
 	packet_date = packet_date.strftime("%Y-%m-%d %H:%M:%S") 
 	
@@ -93,22 +60,64 @@ def decodage_udp(date2, bench_3, bench_5, framesize, trame,):
 	MID_field_28 = format(field_28, '06b')
 	MID_field_29 = format(field_29, '06b')
 	MID_field_30 = format(field_30, '010b')
-
 	MID = MID_field_14 + MID_field_18 + MID_field_28 + MID_field_29 + MID_field_30    
 	PMID = hex(int(MID, 2))    
-
     
-	FT_bench_5 = FT_0(bench_5)
-	FT_macdest = FT_MAC(macdest)
-	FT_macsrc = FT_MAC(macsrc)
-	FT_src_ip = FT_IP(src_ip)
-	FT_dest_ip = FT_IP(dest_ip)
-	FT_field_14 = FT_7(field_14)
-	FT_field_17 = FT_5(field_17)
-	FT_field_18 = FT_2(field_18)
-	FT_field_28 = FT_3(field_28)
-	FT_field_29 = FT_4(field_29)
-	FT_field_32 = FT_1(field_32)
-	FT_MID = FT_6(PMID)
- 
-	return framedate, FT_MID, bench_3, FT_bench_5, framesize, FT_macdest, FT_macsrc, field_1, field_2, field_3, field_4, field_5, field_6, field_7, FT_src_ip, FT_dest_ip, field_9, field_10, field_11, FT_field_14, field_16, FT_field_17, FT_field_18, field_20, field_21, field_23, field_25, field_26, FT_field_28, FT_field_29, field_30, FT_field_32, packet_date 
+	field_14 = hex(field_14)
+	field_18 = hex(field_18)
+	field_28 = hex(field_28)
+	field_29 = hex(field_29)
+
+	for keys, value in FT['FT_6'].items():
+		if PMID == keys:
+			PMID = value
+   
+	for keys, value in FT['FT_0'].items():
+		if bench_5 == keys:
+			bench_5 = value
+
+	for keys, value in FT['FT_MAC'].items():
+		if macdest == keys:
+			macdest = value
+   
+	for keys, value in FT['FT_MAC'].items():
+		if macsrc == keys:
+			macsrc = value
+	
+	for keys, value in FT['FT_IP'].items():
+		if src_ip == keys:
+			src_ip = value
+   
+	for keys, value in FT['FT_IP'].items():
+		if dest_ip == keys:
+			dest_ip = value
+	
+	for keys, value in FT['FT_7'].items():
+		if field_14 == keys:
+			field_14 = value
+    
+	for keys, value in FT['FT_5'].items():
+		if str(field_17) == keys:
+			field_17 = value
+           
+	for keys, value in FT['FT_2'].items():
+		if field_18 == keys:
+			field_18 = value
+	
+	for keys, value in FT['FT_3'].items():
+		if field_28 == keys:
+			field_28 = value
+	
+	for keys, value in FT['FT_4'].items():
+		if field_29 == keys:
+			field_29 = value
+   
+	for keys, value in FT['FT_1'].items():
+		if str(field_32) == keys:
+			field_32 = value
+   
+	return (framedate, PMID, bench_3, bench_5, framesize, macdest, macsrc, 
+         field_1, field_2, field_3, field_4, field_5, field_6, field_7, src_ip, 
+         dest_ip, field_9, field_10, field_11, field_14, field_16, field_17, field_18, 
+         field_20, field_21, field_23, field_25, field_26, field_28, field_29, field_30, 
+         field_32, packet_date) 

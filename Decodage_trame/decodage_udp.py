@@ -1,6 +1,5 @@
 import struct
 import datetime
-import json
 from fonction_decodage import*
 
 def decodage_udp(date2, bench_3, bench_5, framesize, trame, FT):
@@ -63,59 +62,19 @@ def decodage_udp(date2, bench_3, bench_5, framesize, trame, FT):
 	MID = MID_field_14 + MID_field_18 + MID_field_28 + MID_field_29 + MID_field_30    
 	PMID = hex(int(MID, 2))    
     
-	field_14 = hex(field_14)
-	field_18 = hex(field_18)
-	field_28 = hex(field_28)
-	field_29 = hex(field_29)
-
-	for keys, value in FT['FT_6'].items():
-		if PMID == keys:
-			PMID = value
-   
-	for keys, value in FT['FT_0'].items():
-		if bench_5 == keys:
-			bench_5 = value
-
-	for keys, value in FT['FT_MAC'].items():
-		if macdest == keys:
-			macdest = value
-   
-	for keys, value in FT['FT_MAC'].items():
-		if macsrc == keys:
-			macsrc = value
-	
-	for keys, value in FT['FT_IP'].items():
-		if src_ip == keys:
-			src_ip = value
-   
-	for keys, value in FT['FT_IP'].items():
-		if dest_ip == keys:
-			dest_ip = value
-	
-	for keys, value in FT['FT_7'].items():
-		if field_14 == keys:
-			field_14 = value
-    
-	for keys, value in FT['FT_5'].items():
-		if str(field_17) == keys:
-			field_17 = value
-           
-	for keys, value in FT['FT_2'].items():
-		if field_18 == keys:
-			field_18 = value
-	
-	for keys, value in FT['FT_3'].items():
-		if field_28 == keys:
-			field_28 = value
-	
-	for keys, value in FT['FT_4'].items():
-		if field_29 == keys:
-			field_29 = value
-   
-	for keys, value in FT['FT_1'].items():
-		if str(field_32) == keys:
-			field_32 = value
-   
+	bench_5 = FTr_0(hex(bench_5), FT)
+	PMID = FTr_6(PMID, FT)
+	macdest = FTr_MAC(macdest, FT)
+	macsrc = FTr_MAC(macsrc, FT)
+	src_ip = FTr_IP(src_ip, FT)
+	dest_ip = FTr_IP(dest_ip, FT)
+	field_14 = FTr_7(hex(field_14), FT)
+	field_17 = FTr_5(str(field_17), FT)
+	field_18 = FTr_2(hex(field_18), FT)
+	field_28 = FTr_3(hex(field_28), FT)
+	field_29 = FTr_4(hex(field_29), FT)
+	field_32 = FTr_1(str(field_32), FT)
+ 
 	return (framedate, PMID, bench_3, bench_5, framesize, macdest, macsrc, 
          field_1, field_2, field_3, field_4, field_5, field_6, field_7, src_ip, 
          dest_ip, field_9, field_10, field_11, field_14, field_16, field_17, field_18, 

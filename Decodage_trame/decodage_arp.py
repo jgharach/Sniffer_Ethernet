@@ -22,33 +22,13 @@ def decodage_arp(date2, bench_3, bench_5, framesize, trame, FT):
 	framedate = date_init_framedate + datetime.timedelta(0, date2)
 	framedate = framedate.strftime("%Y-%m-%d %H:%M:%S")
  
-	for keys, value in FT['FT_0'].items():
-		if bench_5 == keys:
-			bench_5 = value
-
-	for keys, value in FT['FT_MAC'].items():
-		if macdest == keys:
-			macdest = value
-   
-	for keys, value in FT['FT_MAC'].items():
-		if macsrc == keys:
-			macsrc = value
-	
-	for keys, value in FT['FT_MAC'].items():
-		if mac_sender == keys:
-			mac_sender = value
-   
-	for keys, value in FT['FT_IP'].items():
-		if sender_ip == keys:
-			sender_ip = value
-	 
-	for keys, value in FT['FT_MAC'].items():
-		if mac_target == keys:
-			mac_target = value
-   
-	for keys, value in FT['FT_IP'].items():
-		if target_ip == keys:
-			sender_ip = value
+	bench_5 = FTr_0(hex(bench_5), FT)
+	macdest = FTr_MAC(macdest, FT)
+	macsrc = FTr_MAC(macsrc, FT)
+	mac_sender = FTr_MAC(mac_sender, FT)
+	sender_ip = FTr_IP(sender_ip, FT)
+	mac_target = FTr_MAC(mac_target, FT)
+	target_ip = FTr_IP(target_ip, FT)
 
 	return (framedate, bench_3, bench_5, framesize, macdest, macsrc, 
          field_1, field_2, field_3, field_4, field_5, field_6, mac_sender, sender_ip, mac_target, target_ip)

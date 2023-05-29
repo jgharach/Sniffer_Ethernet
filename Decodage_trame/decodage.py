@@ -16,7 +16,7 @@ try:
 		data = f.read(28)
 		date1, date2, bench_3, bench_4_5_6, framesize = struct.unpack('>ddIII', data)
 		mask = 0b00000000000011110000000000000000  
-		bench_5 = hex((bench_4_5_6 & mask) >> 16)
+		bench_5 = (bench_4_5_6 & mask) >> 16
 		trame = f.read(framesize)
 		field_1 = struct.unpack_from('>H', trame, 12)
 		field_1 = hex(field_1[0])

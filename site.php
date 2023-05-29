@@ -12,10 +12,13 @@
         $req->execute();
         $nom_test = $req->fetchall(PDO::FETCH_ASSOC);
         $req->closeCursor();
+        $nom_tests = [];
         $url = "http://localhost/Website/affichage_trame.php";
         foreach ($nom_test as $key => $val){
-            echo "<a href='$url'>{$val['nom_test']}</a><br>";
+            array_push($nom_tests, "{$val['nom_test']}");
         }
+        echo "<a href='$url'>$nom_tests[0]</a> <br>";
+        echo "<a href='$url'>$nom_tests[1]</a> <br>";
     ?>
 </body> 
  </html>

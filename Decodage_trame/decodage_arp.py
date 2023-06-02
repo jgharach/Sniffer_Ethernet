@@ -31,4 +31,4 @@ def decodage_arp(date2, bench_3, bench_5, framesize, trame, FT):
 	target_ip = FTr_IP(target_ip, FT)
 
 	return (framedate, bench_3, bench_5, framesize, macdest, macsrc, 
-         field_1, field_2, field_3, field_4, field_5, field_6, mac_sender, sender_ip, mac_target, target_ip)
+         hex(field_1), field_2, field_3, field_4, field_5, field_6, mac_sender, sender_ip, mac_target, target_ip)

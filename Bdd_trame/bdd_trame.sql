@@ -1,7 +1,7 @@
 CREATE TABLE test (
     id_test INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
     nom_test VARCHAR(100), 
-    date_execution DATETIME
+    date_execution DATE
 )
 CREATE TABLE trame (
     id_trame INT AUTO_INCREMENT PRIMARY KEY NOT NULL, 

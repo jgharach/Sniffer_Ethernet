@@ -76,7 +76,7 @@ def decodage_udp(date2, bench_3, bench_5, framesize, trame, FT):
 	field_32 = FTr_1(str(field_32), FT)
  
 	return (framedate, PMID, bench_3, bench_5, framesize, macdest, macsrc, 
-         field_1, field_2, field_3, field_4, field_5, field_6, field_7, src_ip, 
+         hex(field_1), field_2, field_3, field_4, field_5, field_6, field_7, src_ip, 
          dest_ip, field_9, field_10, field_11, field_14, field_16, field_17, field_18, 
          field_20, field_21, field_23, field_25, field_26, field_28, field_29, field_30, 
          field_32, packet_date) 

@@ -5,7 +5,6 @@ import json
 from decodage_udp import decodage_udp
 from decodage_arp import decodage_arp
 
-start_time = time.time()
 f = open("Decodage_trame/fonction_transfert.json", "r")
 FT = json.load(f)
 f.close()
@@ -39,7 +38,7 @@ db = mysql.connector.connect(
     database = "gj200498"
 )
 cursor = db.cursor()
-"""
+
 sql = "INSERT INTO test (nom_test, date_execution) VALUES (%s, %s)"
 val = [
   	("Vt_DEMO_mem_observability", "22-09-01"),
@@ -66,6 +65,3 @@ for trame in trames:
 		val_arp = trame + (2,)
 		cursor.execute(req_arp, val_arp)
 #db.commit()
-end_time = time.time()
-temps_execution = end_time - start_time
-print("Temps d'execution", temps_execution)

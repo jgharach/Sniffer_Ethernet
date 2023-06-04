@@ -5,8 +5,8 @@ from fonction_decodage import*
 def decodage_arp(date2, bench_3, bench_5, framesize, trame, FT):
 	"""La fonction decodage_arp prend en entrée les variables date2, bench_3, bench_5, framesize, trame, FT 
 	permettant de décoder la structure d'une trame arp en appliquant les fonctions transfert et renvoie
-	les variables suivantes framedate, bench_3, bench_5, framesize, macdest, macsrc, 
-	field_1, field_2, field_3, field_4, field_5, field_6, mac_sender, sender_ip, mac_target, target_ip"""	
+	les valeurs suivantes framedate, bench_3, bench_5, framesize, @ mac destination,  @ mac source, 
+	field_1, field_2, field_3, field_4, field_5, field_6,  @ mac sender,  @ ip sender,  @ mac target,  @ ip target"""	
  
 	(macd1, macd2, macd3, macd4, macd5, macd6,
 	macs1, macs2, macs3, macs4, macs5, macs6,

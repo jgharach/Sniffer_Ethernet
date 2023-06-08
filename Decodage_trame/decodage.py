@@ -20,10 +20,9 @@ trames = [] # Création d'une liste vide pour stocker les trames
 try:
 	while True: # Lecture de toutes les trames du fichier binaire
 		data = f.read(28) # Lecture des 28 premiers octets 
-		# Décommutation des 28 premiers octets en big endian
-		date1, date2, bench_3, bench_4_5_6, framesize = struct.unpack('>ddIII', data) 
-		mask = 0b00000000000011110000000000000000  # Masque de 4 bits
-		bench_5 = (bench_4_5_6 & mask) >> 16 # Décalage vers la droite de 16 bits 
+		date1, date2, bench_3, bench_4_5_6, framesize = struct.unpack('>ddIII', data) # Décommutation des 28 premiers octets en big endian
+		mask = 0b00000000000011110000000000000000  # Masque de 4 bits pour récupérer sélectionner les 4 bits du bench_5 parmi 4 octets 
+		bench_5 = (bench_4_5_6 & mask) >> 16 # Décalage vers la droite de 16 bits pour obtenir les bits de poids fort
 		trame = f.read(framesize) # Taille de la trame stocké dans une variable 
 		field_1 = struct.unpack_from('>H', trame, 12) # Décommutation du field 1
 		field_1 = hex(field_1[0]) # Conversion en hexadécimal
@@ -40,7 +39,7 @@ try:
 except struct.error: # Capture l'exception struct.error
     None 
 
-donnees_test = extraction(fic_rep, "r") # Appel d'une fonction extraction 
+donnees_test = extraction(fic_rep, "r") # Appel d'une fonction extraction venant récupérer les données de la configuration du test 
  
 for trame in trames: # Boucle affichant toutes les trames
     print(trame) 

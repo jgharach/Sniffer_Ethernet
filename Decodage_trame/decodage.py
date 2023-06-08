@@ -7,9 +7,9 @@ from decodage_udp import decodage_udp
 from decodage_arp import decodage_arp
 from fonction_decodage import extraction
 
-fic_binaire = "Vt_DEMO_power_on/ethernet.result_data" # Fichier binaire comportant les trames à décoder 
+fic_binaire = "Vt_DEMO_power_on/ethernet.result_data" # Fichier binaire ccomportant les trames à décoder 
 fic_rep = "Vt_DEMO_power_on/Vt_DEMO_power_on.rep" # Fichier comportant la configuration du test
-id_test = 1 # Identification du test nécéssaire pour l'importation des trames dans la base
+id_test = 1 # Identification du test de manière unique nécéssaire pour l'importation des trames dans la base 
  
 f = open("Decodage_trame/fonction_transfert.json", "r") # Ouverture du fichier fonction transfert 
 FT = json.load(f) # Déserialisation des données
@@ -39,7 +39,7 @@ try:
 except struct.error: # Capture l'exception struct.error
     None 
 
-donnees_test = extraction(fic_rep, "r") # Appel d'une fonction extraction venant récupérer les données de la configuration du test 
+donnees_test = extraction(fic_rep) # Appel d'une fonction extraction venant récupérer les données de la configuration du test 
  
 for trame in trames: # Boucle affichant toutes les trames
     print(trame) 

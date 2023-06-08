@@ -12,7 +12,7 @@ def adr_mac(mac1, mac2, mac3, mac4, mac5, mac6):
         return mac
 
 def adr_ip(ip1, ip2, ip3, ip4):
-        """ La fonction adr_ip prend en entrée 6 entiers et 
+        """ La fonction adr_ip prend en entrée 4 entiers et 
         les renvoie sous la forme d'une adresse IP"""
         ip = [str(ip1), str(ip2), str(ip3), str(ip4)]
         ip = '.'.join(ip)

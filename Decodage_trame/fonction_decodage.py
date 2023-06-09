@@ -111,7 +111,7 @@ def extraction(fic):
         obsw = obsw + "" + version_obsw
         version_bds = infos_extrait[9].rstrip().split(':')[1]
         type_et_ver_moyen = infos_extrait[10].rstrip().split(':')[1]
-        date_execution = infos_extrait[14].rstrip().split(':')[1]
+        date_execution = eval(infos_extrait[14].rstrip().split(':')[1])
         nom_test = infos_extrait[27].rstrip().split(':')[1]
         f.close()
         return obsw, version_bds, type_et_ver_moyen, date_execution, nom_test

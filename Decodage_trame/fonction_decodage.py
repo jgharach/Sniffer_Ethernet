@@ -20,7 +20,7 @@ def adr_ip(ip1, ip2, ip3, ip4):
 
 def FTr_0(val, FT):
         """La fonction FTr_0 prend en entrée une valeur, un dictionnaire comportant les fonctions transfert
-        puis applique la fonction transfert 0 sur cette valeur et renvoie cette valeur transformée"""
+        puis applique la fonction transfert 0 sur cette valeur et renvoie le label correspondant"""
         for keys, value in FT['FT_0'].items():
                 if val == keys:
                         val = value
@@ -28,7 +28,7 @@ def FTr_0(val, FT):
         
 def FTr_MAC(val, FT):
         """La fonction FTr_MAC prend en entrée une valeur, un dictionnaire comportant les fonctions transfert
-        puis applique la fonction transfert MAC sur cette valeur et renvoie cette valeur transformée"""
+        puis applique la fonction transfert MAC sur cette valeur et renvoie le label correspondant"""
         for keys, value in FT['FT_MAC'].items():
                 if val == keys:
                         val = value
@@ -36,7 +36,7 @@ def FTr_MAC(val, FT):
                         
 def FTr_IP(val,FT):
         """La fonction FTr_IP prend en entrée une valeur, un dictionnaire comportant les fonctions transfert
-        puis applique la fonction transfert IP sur cette valeur et renvoie cette valeur transformée"""
+        puis applique la fonction transfert IP sur cette valeur et renvoie le label correspondant"""
         for keys, value in FT['FT_IP'].items():
                 if val == keys:
                         val = value
@@ -45,7 +45,7 @@ def FTr_IP(val,FT):
                         
 def FTr_1(val,FT):
         """La fonction FTr_1 prend en entrée une valeur, un dictionnaire comportant les fonctions transfert
-        puis applique la fonction transfert 1 sur cette valeur et renvoie cette valeur transformée"""
+        puis applique la fonction transfert 1 sur cette valeur et renvoie le label correspondant"""
         for keys, value in FT['FT_1'].items():
                 if val == keys:
                         val = value
@@ -53,7 +53,7 @@ def FTr_1(val,FT):
 
 def FTr_2(val,FT):
         """La fonction FTr_2 prend en entrée une valeur, un dictionnaire comportant les fonctions transfert
-        puis applique la fonction transfert 2 sur cette valeur et renvoie cette valeur transformée"""
+        puis applique la fonction transfert 2 sur cette valeur et renvoie le label correspondant"""
         for keys, value in FT['FT_2'].items():
                 if val == keys:
                         val = value
@@ -62,7 +62,7 @@ def FTr_2(val,FT):
 
 def FTr_3(val,FT):
         """La fonction FTr_3 prend en entrée une valeur, un dictionnaire comportant les fonctions transfert
-        puis applique la fonction transfert 3 sur cette valeur et renvoie cette valeur transformée"""
+        puis applique la fonction transfert 3 sur cette valeur et renvoie le label correspondant"""
         for keys, value in FT['FT_3'].items():
                 if val == keys:
                         val = value
@@ -70,7 +70,7 @@ def FTr_3(val,FT):
 
 def FTr_4(val,FT):
         """La fonction FTr_4 prend en entrée une valeur, un dictionnaire comportant les fonctions transfert
-        puis applique la fonction transfert 4 sur cette valeur et renvoie cette valeur transformée"""
+        puis applique la fonction transfert 4 sur cette valeur et renvoie le label correspondant"""
         for keys, value in FT['FT_4'].items():
                 if val == keys:
                         val = value
@@ -78,7 +78,7 @@ def FTr_4(val,FT):
 
 def FTr_5(val,FT):
         """La fonction FTr_5 prend en entrée une valeur, un dictionnaire comportant les fonctions transfert
-        puis applique la fonction transfert 5 sur cette valeur et renvoie cette valeur transformée"""
+        puis applique la fonction transfert 5 sur cette valeur et renvoie le label correspondant"""
         for keys, value in FT['FT_5'].items():
                 if val == keys:
                         val = value
@@ -86,7 +86,7 @@ def FTr_5(val,FT):
 
 def FTr_6(val,FT):
         """La fonction FTr_6 prend en entrée une valeur, un dictionnaire comportant les fonctions transfert
-        puis applique la fonction transfert 6 sur cette valeur et renvoie cette valeur transformée"""
+        puis applique la fonction transfert 6 sur cette valeur et renvoie le label correspondant"""
         for keys, value in FT['FT_6'].items():
                 if val == keys:
                        val = value
@@ -94,7 +94,7 @@ def FTr_6(val,FT):
 
 def FTr_7(val,FT):
         """La fonction FTr_7 prend en entrée une valeur, un dictionnaire comportant les fonctions transfert
-        puis applique la fonction transfert 7 sur cette valeur et renvoie cette valeur transformée"""
+        puis applique la fonction transfert 7 sur cette valeur et renvoie le label correspondant"""
         for keys, value in FT['FT_7'].items():
                 if val == keys:
                         val = value

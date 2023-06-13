@@ -12,10 +12,10 @@
         $req->execute();
         $nom_test = $req->fetchall(PDO::FETCH_ASSOC);
         $req->closeCursor();
-        $url = "http://localhost/Website/affichage_trame.php";
-        foreach ($nom_test as $key => $val){
-            echo "<a href='$url'>{$val['nom_test']}</a><br>";
-        }
+        for($i=0 ; $i< count($nom_test); $i++){
+            $url = "http://isis.unice.fr/~gj200498/acces/Website/affichage_date.php?test={$nom_test[$i]['nom_test']}";        
+            echo "<a href='$url'>{$nom_test[$i]['nom_test']}</a> <br>";
+        };
     ?>
-</body> 
- </html>
+</body>
+</html>

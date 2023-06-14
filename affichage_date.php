@@ -14,7 +14,7 @@
         $date = $req->fetchall(PDO::FETCH_ASSOC);
         $req->closeCursor();
         for($i=0 ; $i<count($date); $i++){
-            $url = "http://isis.unice.fr/~gj200498/acces/Website/affichage_trame.php?test=$test&date={$date[$i]['date_execution']}";
+            $url = "http://localhost/Website/affichage_trame.php?test=$test&date={$date[$i]['date_execution']}";
             echo "<a href='$url'>{$date[$i]['date_execution']}</a> <br>";
         }
      ?>

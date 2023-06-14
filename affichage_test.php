@@ -13,7 +13,7 @@
         $nom_test = $req->fetchall(PDO::FETCH_ASSOC);
         $req->closeCursor();
         for($i=0 ; $i< count($nom_test); $i++){
-            $url = "http://isis.unice.fr/~gj200498/acces/Website/affichage_date.php?test={$nom_test[$i]['nom_test']}";        
+            $url = "http://localhost/Website/affichage_date.php?test={$nom_test[$i]['nom_test']}";        
             echo "<a href='$url'>{$nom_test[$i]['nom_test']}</a> <br>";
         };
     ?>

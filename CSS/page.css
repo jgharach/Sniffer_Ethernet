@@ -1,0 +1,15 @@
+header{
+    float: right;
+}
+body {
+    background-color: rgb(101, 96, 124)
+}
+table {
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    border: 1px solid black;
+  }
+  
+ 

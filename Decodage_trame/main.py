@@ -18,9 +18,9 @@ print(donnees_test) # Affichage de la configuration du test
  
 db = mysql.connector.connect(
     host="localhost", 
-    user="gj200498",  
-    password = "gj2004987503", 
-    database = "gj200498"
+    user="",  
+    password = "", 
+    database = ""
 )
 
 cursor = db.cursor() # Créer l'objet curseur
